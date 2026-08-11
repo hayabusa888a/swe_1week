@@ -28,3 +28,15 @@ json_str = json.dumps(data, indent=2, ensure_ascii=False)  # JSON形式で保存
 **argparseモジュールについて**
 コマンドライン上で引数を受け取りたいときに便利
 
+##Day3学習内容
+
+###コードリーディング
+デコレーターについて。関数やクラスの前後に特定の処理を追加することのできるもの。
+```python
+@retry(max_attempts=3, delay=1)
+def fetch_data(url):
+#これは fetch_data = retry(max_attempts=3, delay=1)(fetch_data)と同義になる。
+```
+
+###オブジェクト指向
+クラス（設計図）を用いてインスタンス（もの）を生成する。クラスは、属性（インスタンスごとのデータ）とメソッド（関数）をからなる。
