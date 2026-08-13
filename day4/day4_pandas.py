@@ -17,7 +17,11 @@ args = parser.parse_args()
 date = args.date
 min_amount = args.min_amount
 
-print(filter_and_aggregate(df, date, min_amount))
+if __name__ == "__main__":
+    main()
+
+def main():
+    print(filter_and_aggregate(df, date, min_amount))
 
 
 
