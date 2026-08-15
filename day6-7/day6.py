@@ -1,7 +1,7 @@
 import pandas as pd
 import sqlite3
 
-class Transaciton_Aggregate:
+class Transaction_Aggregate:
     def __init__(self, customer_path, product_path, transaction_path, db_path):
         self.customer_path = customer_path
         self.product_path = product_path

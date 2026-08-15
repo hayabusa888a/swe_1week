@@ -31,8 +31,45 @@ def test_aggregate_by_age():
               '2023-02-14 19:10:00']})
 
 
-    sales = day6.Transaciton_Aggregate('dummy', 'dummy', 'dummy', 'dummy')
+    sales = day6.Transaction_Aggregate('dummy', 'dummy', 'dummy', 'dummy')
     results = sales.aggregate_by_age(df_customer, df_product, df_transaction)
     expected = pd.DataFrame({'age_bin': [20, 30, 50, 70],
                              '合計金額': [230.0, 900.0, 400.0, 100.0]})
     pdt.assert_frame_equal(results, expected)
+
+
+def test_aggregate_by_category():
+    df_customer = pd.DataFrame({
+        '顧客id': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        '年齢': [20, 20, 30, 40, 50, 60, 70, 80, 20, 20],
+        '性別': ['男', '男', '男', '男', '男', '男', '男', '男', '男', '男'],
+        '会員登録日': ['2023-01-01', '2023-01-01', '2023-01-02', '2023-01-02', '2023-01-03', '2023-01-03', '2023-01-04', '2023-01-04', '2023-01-05', '2023-01-05']})
+    
+    df_product =pd.DataFrame({
+    '商品id': [1, 2, 3, 4],
+    '商品名': ['チョコ', '卵', 'ペン', '消しゴム'],
+    'カテゴリ': ['食べ物', '食べ物', '文房具', '文房具'],
+    '値段': ['100', '200', '100', '50']  })
+    
+    df_transaction = pd.DataFrame({
+    '取引id':  [1, 1, 2, 3, 3, 3, 4, 5, 5, 6, 7, 8],
+    '顧客id':  [1, 1, 2, 3, 3, 3, 1, 5, 5, 7, 2, 10],
+    '商品id':  [1, 3, 2, 1, 2, 4, 4, 3, 2, 1, 3, 4],
+    '個数':    [2, 1, 1, 3, 2, 4, 1, 2, 1, 1, 5, 2],
+    '合計金額': [200, 100, 200, 300, 400, 200, 50, 200, 200, 100, 500, 100],
+    '取引日時': ['2023-02-01 10:15:00', '2023-02-01 10:15:00',
+                '2023-02-01 14:30:00',
+                '2023-02-03 09:05:00', '2023-02-03 09:05:00', '2023-02-03 09:05:00',
+                '2023-02-05 18:40:00',
+                '2023-02-07 11:20:00', '2023-02-07 11:20:00',
+                '2023-02-09 16:00:00',
+                '2023-02-11 12:45:00',
+                '2023-02-14 19:10:00']})
+
+    sales = day6.Transaction_Aggregate('dummy', 'dummy', 'dummy', 'dummy')
+    results = sales.aggregate_by_category(df_customer, df_product, df_transaction)
+    expected = pd.DataFrame({
+        'カテゴリ': ['文房具', '食べ物'],
+        '個数': [2.5, 2.0]})
+    pdt.assert_frame_equal(results, expected)
+
